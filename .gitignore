@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local database
+*.duckdb
+*.duckdb.wal
+
+# Raw data
+data/raw/
+
+# dbt generated files
+target/
+dbt_packages/
+logs/
+
+# Environment variables
+.env
+
+# Local IDE
+.vscode/
