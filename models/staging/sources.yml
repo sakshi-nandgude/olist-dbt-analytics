@@ -1,0 +1,23 @@
+
+version: 2
+
+sources:
+  - name: olist
+    description: "Raw Olist Brazilian e-commerce dataset"
+    schema: raw
+
+    tables:
+      - name: customers
+        description: "Customer information"
+
+      - name: orders
+        description: "Order transactions and delivery information"
+
+      - name: order_items
+        description: "Products included in each order"
+
+      - name: products
+        description: "Product information and categories"
+
+      - name: payments
+        description: "Payment information for each order"
