@@ -1,0 +1,49 @@
+
+version: 2
+
+models:
+
+  - name: int_order_items_enriched
+    description: >
+      Enriched order item data combining order,
+      product and customer information.
+
+    columns:
+      - name: order_id
+        description: "Identifier of the e-commerce order."
+
+      - name: product_id
+        description: "Identifier of the purchased product."
+
+      - name: customer_id
+        description: "Identifier of the purchasing customer."
+
+      - name: total_item_value
+        description: "Product price plus freight value."
+
+      - name: is_late_delivery
+        description: "Indicates whether delivery occurred after the estimated date."
+
+  - name: int_orders_aggregated
+    description: >
+      One row per order containing aggregated
+      item values and delivery metrics.
+
+    columns:
+      - name: order_id
+        description: "Unique order identifier."
+
+      - name: total_items
+        description: "Total number of items in the order."
+
+      - name: product_revenue
+        description: "Sum of product prices."
+
+      - name: freight_revenue
+        description: "Sum of freight charges."
+
+      - name: total_order_value
+        description: "Product revenue plus freight revenue."
+
+      - name: delivery_days
+        description: "Number of days between purchase and delivery."

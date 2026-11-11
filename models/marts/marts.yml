@@ -4,7 +4,7 @@ version: 2
 models:
 
   - name: dim_customers
-    description: "Customer dimension with historical purchasing metrics."
+    description: "Customer dimension containing historical purchasing behaviour and lifetime value."
     columns:
       - name: customer_unique_id
         tests:
@@ -16,7 +16,7 @@ models:
           - not_null
 
   - name: dim_products
-    description: "Product dimension with standardized product attributes."
+    description: "Product dimension containing standardized product categories and physical attributes."
     columns:
       - name: product_id
         tests:
@@ -24,7 +24,7 @@ models:
           - not_null
 
   - name: fct_orders
-    description: "One row per order with revenue and delivery metrics."
+    description: "Central order-level fact table containing revenue, order status and delivery metrics."
     columns:
       - name: order_id
         tests:
@@ -43,7 +43,7 @@ models:
           - not_null
 
   - name: mart_monthly_revenue
-    description: "Monthly revenue and delivery performance summary."
+    description: "Monthly business performance summary covering revenue, orders and delivery metrics."
     columns:
       - name: order_month
         tests:
