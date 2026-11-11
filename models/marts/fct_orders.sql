@@ -1,8 +1,28 @@
 
+{{
+    config(
+        materialized='incremental',
+        unique_key='order_id',
+        incremental_strategy='delete+insert'
+    )
+}}
+
 WITH orders AS (
 
     SELECT *
     FROM {{ ref('int_orders_aggregated') }}
+
+    {% if is_incremental() %}
+
+        WHERE order_purchase_timestamp >= (
+            SELECT COALESCE(
+                MAX(order_purchase_timestamp) - INTERVAL 30 DAY,
+                TIMESTAMP '1900-01-01'
+            )
+            FROM {{ this }}
+        )
+
+    {% endif %}
 
 ),
 
@@ -18,12 +38,10 @@ customers AS (
 final AS (
 
     SELECT
-        -- Order identifiers
         o.order_id,
         o.customer_id,
         c.customer_unique_id,
 
-        -- Order status
         o.order_status,
 
         CASE
@@ -36,23 +54,19 @@ final AS (
             ELSE FALSE
         END AS is_cancelled,
 
-        -- Order dates
         o.order_purchase_timestamp,
         o.order_approved_at,
         o.order_delivered_carrier_date,
         o.order_delivered_customer_date,
         o.order_estimated_delivery_date,
 
-        -- Order quantities
         o.total_items,
         o.unique_products,
 
-        -- Financial metrics
         o.product_revenue,
         o.freight_revenue,
         o.total_order_value AS order_revenue,
 
-        -- Delivery performance
         o.delivery_days,
         o.is_late_delivery
 
