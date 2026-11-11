@@ -1,0 +1,55 @@
+
+version: 2
+
+models:
+
+  - name: dim_customers
+    description: "Customer dimension with historical purchasing metrics."
+    columns:
+      - name: customer_unique_id
+        tests:
+          - unique
+          - not_null
+
+      - name: total_orders
+        tests:
+          - not_null
+
+  - name: dim_products
+    description: "Product dimension with standardized product attributes."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_orders
+    description: "One row per order with revenue and delivery metrics."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_unique_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_unique_id
+
+      - name: order_revenue
+        tests:
+          - not_null
+
+  - name: mart_monthly_revenue
+    description: "Monthly revenue and delivery performance summary."
+    columns:
+      - name: order_month
+        tests:
+          - unique
+          - not_null
+
+      - name: total_orders
+        tests:
+          - not_null
