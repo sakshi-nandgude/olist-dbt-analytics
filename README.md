@@ -119,3 +119,18 @@ The project enables analysis of revenue performance, product demand, customer re
 - Cloud-based analytical data storage
 - Additional customer segmentation models
 - Advanced cohort and retention analysis
+
+
+## Dashboard Preview
+
+### 1. Executive Overview
+![Executive Overview](screenshots/executive-overview.png)
+
+### 2. Product Analytics
+![Product Analytics](screenshots/product-analytics.png)
+
+### 3. Customer Analytics
+![Customer Analytics](screenshots/customer-analytics.png)
+
+### 4. Delivery & Logistics
+![Delivery & Logistics](screenshots/delivery-logistics.png)
