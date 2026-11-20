@@ -22,3 +22,5 @@ logs/
 .vscode/
 
 data/processed/
+
+diary.txt
